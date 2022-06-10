@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+    server:
+        image: spotify-api-server:${VERSION_IMAGE}
+        platform: ${HOST_CPU_ARCHITECTURE}
+        privileged: true
+        build:
+            args:
+                NODE_VERSION : ${NODE_VERSION}
+                GITHUB_USER_TOKEN : ${GITHUB_USER_TOKEN}
+        container_name: ${NOM_PROJET}_SERVER
+        restart: always
+        env_file:
+            - .env
+        volumes:
+            - spotify-api-volume:/app/spotify-api/
+        ports:
+            - ${HOST_MACHINE_HTTP_PORT}:${HOST_MACHINE_HTTP_PORT}
+
+volumes:
+    spotify-api-volume:
