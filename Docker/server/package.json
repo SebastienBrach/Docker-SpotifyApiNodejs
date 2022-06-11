@@ -1,0 +1,12 @@
+{
+  "name": "spotify-api",
+  "version": "1.0.0",
+  "description": "Spotify Web API Usage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}

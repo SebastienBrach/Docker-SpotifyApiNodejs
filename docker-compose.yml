@@ -6,9 +6,9 @@ services:
         platform: ${HOST_CPU_ARCHITECTURE}
         privileged: true
         build:
+            context: ./Docker/server
             args:
                 NODE_VERSION : ${NODE_VERSION}
-                GITHUB_USER_TOKEN : ${GITHUB_USER_TOKEN}
         container_name: ${NOM_PROJET}_SERVER
         restart: always
         env_file:
