@@ -1,7 +1,10 @@
 const express = require('express')
+const fs = require('fs')
 const SpotifyWebApi = require('spotify-web-api-node')
 const app = express()
 const port = 3000
+const tokenFile = 'token.json'
+const getMe = require("./getMe.js");
 const spotifyApi = new SpotifyWebApi({
   clientId: 'bbd636c28a7f4b9f875948046b3021f6',
   clientSecret: 'f03f9ac87576486d82168c602fd7cea3',
@@ -54,24 +57,32 @@ app.get('/auth', async (req, res) => {
     console.log('Refresh Token: ', refreshToken)
 
     const exprireIn = resultAuthrizationCodeGrantt.body['expires_in']
-    console.log('Expires in: ', exprireIn)
     res.send('Success')
 
     setInterval(async () => {
       const data = await spotifyApi.refreshAccessToken()
       const accessToken = data.body['access_token']
-      console.log('Access Token Refreshed: ', accessToken)
+      // console.log('Access Token Refreshed: ', accessToken)
       spotifyApi.setAccessToken(accessToken)
-    }, exprireIn / 2 * 1000)
+
+      fs.readFile(tokenFile, (err, data) => {
+        if(!err){
+          fs.writeFile(tokenFile, '', ()=>{
+            fs.writeFile(tokenFile, accessToken, ()=>{console.log('oui')})
+          })
+        }
+      })
+    },exprireIn / 2 * 1000)
 
   } catch (error) {
     console.log('Error: ', error)
-    res.send('Error: ', error)
+    res.send(`Error:  ${error}`)
   }
 
 })
 
-app.get('/test', (req, res) => {
+app.get('/getMe', async (req, res) => {
+  res.send(await getMe.getDataAboutMe())
 })
 
 app.listen(port, () => {

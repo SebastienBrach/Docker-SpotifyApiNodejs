@@ -1,16 +1,15 @@
 const fs = require('fs')
 const SpotifyWebApi = require('spotify-web-api-node')
 // const token = JSON.parse(fs.readFileSync('token.json'))
-const token = 'BQBJMgb3yGkzyvWIJofTyJZ7AkcJSiBdQIQGUKZNdvv4_fFDYpcxLq1--XHwM98rEFpPZIcqCReGFDAyZ-taKSSy58lSQ_qxyu7mBgNhGedh05XLrv-OgZxJUsGz98gPW5u6AI_a1qzGUX3mcTO_UD-blp_MOkOkJE-A8C2M-vpGFe8ZR-4yIR1_peusg6uoqs66JgzOl8rpVebNcDmjwjDc6sUd6-G1q6r6libBfZx_uIFIJm9nKd4_j8EsjNKtouYD0q8m0PhNLw__3EzBKvWVOS4MpSodSLpUNhZ1bSCFLTdkQgD3lgdfm_Qghsk0Bvut5dAIRFS3cblOHwFQXA'
+const token = 'BQBXNhSRZRF-p_giiv-DC9nvbeM-VBvPjbvANfotsIkXtesPnbX24lkypzEsQSHoAEQ2VF-HXToV2CajISxkJOAi1fEILaHl3GExJGPEq_XhZXWw_H6hyt8nuvTyYDNRGP8whxl_jlsrLV_8aQaExRd5EEm7NvbEIy8_frpITS8uA6slhLmthEW7ymkVTM9zSM0MmKxJrRUybouFOp92FL1z6ohnL6-cfaUiq3-o6YcZSd29hx6DwnKu1Tr4DGjnuP7l9AKK1XqEm70OYJtZwDd3D2hPHmzyf0dGzVL-Tbqys47KcUwsEYnMC5AczKAP8nDTzpug3UQVsn6HYagrKA'
 
 const spotifyApi = new SpotifyWebApi()
 spotifyApi.setAccessToken(token)
 
 async function getDataAboutMe(){
     let me = await spotifyApi.getMe()
-    getMyPlaylists(me.body.id)
-    // console.log(me.body)
     return me
+    // getMyPlaylists(me.body.id)
 }
 
 async function getMyPlaylists(idUser){
@@ -19,4 +18,7 @@ async function getMyPlaylists(idUser){
 }
 
 
-getDataAboutMe()
+
+module.exports = {
+    getDataAboutMe : getDataAboutMe,
+}
