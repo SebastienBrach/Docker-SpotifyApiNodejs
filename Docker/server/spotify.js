@@ -43,28 +43,20 @@ class Spotify {
         return this.spotifyApi.createAuthorizeURL(this.spotifyScopes)
     }
 
-    async auth(req){
-        const error = req.query.error
-        if (error) {
-            return {
-                state : 'Auth Error',
-                message : error
-            };
-        }
-        
+    async auth(req){     
+        this.authRequestErrorManagement(req.query.error)   
         try {
             await this.getDataFromRequest(req)
             this.expirationTokenManagement()
-
-            return {
-                state : 'success',
-                message : 'Auth Success'
-            };
+            return this.returnToServer('success', 'Auth Success')
         } catch (error) {
-            return {
-                state : 'Error',
-                message : error
-            };
+            return this.returnToServer('Error', error)
+        }
+    }
+
+    authRequestErrorManagement(error){
+        if (error) {
+            return this.returnToServer('Auth Error', error)
         }
     }
 
@@ -96,15 +88,25 @@ class Spotify {
             const data = await this.spotifyApi.refreshAccessToken()
             const accessToken = data.body['access_token']
             this.spotifyApi.setAccessToken(accessToken)
-
-            fs.readFile(this.tokenFile, (err) => {
-                if(!err){
-                    fs.writeFile(this.tokenFile, '', ()=>{
-                        fs.writeFile(this.tokenFile, accessToken, ()=>{console.log('oui')})
-                    })
-                }
-            })
+            this.tokenFileManagement()
         }, this.tokenExpiration / 2 * 1000)
+    }
+
+    tokenFileManagement(){
+        fs.readFile(this.tokenFile, (err) => {
+            if(!err){
+                fs.writeFile(this.tokenFile, '', ()=>{
+                    fs.writeFile(this.tokenFile, accessToken, ()=>{console.log('oui')})
+                })
+            }
+        })
+    }
+
+    returnToServer(state, message){
+        return {
+            state : state,
+            message : message
+        }; 
     }
 }
 

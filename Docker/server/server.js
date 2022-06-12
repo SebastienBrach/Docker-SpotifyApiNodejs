@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-// const getMe = require("./getMe.js");
+const getMe = require("./getMe.js");
 const Spotify = require("./spotify.js");
 let spotify = new Spotify.instance()
 
