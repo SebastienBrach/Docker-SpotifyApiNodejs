@@ -46,37 +46,15 @@ class Spotify {
     async auth(req){
         const error = req.query.error
         if (error) {
-            console.log('Auth Error: ', error)
-            res.send('Auth Error: ', error)
-            return 
+            return {
+                state : 'Auth Error',
+                message : error
+            };
         }
         
         try {
-            const code = req.query.code
-            const resultAuthrizationCodeGrantt = await this.spotifyApi.authorizationCodeGrant(code)
-            const accessToken = resultAuthrizationCodeGrantt.body['access_token']
-            this.spotifyApi.setAccessToken(accessToken)
-            console.log('Access Token: ', accessToken)
-            const refreshToken = resultAuthrizationCodeGrantt.body['refresh_token']
-            this.spotifyApi.setRefreshToken(refreshToken)
-            console.log('Refresh Token: ', refreshToken)
-
-            const exprireIn = resultAuthrizationCodeGrantt.body['expires_in']
-            
-
-            setInterval(async () => {
-                const data = await this.spotifyApi.refreshAccessToken()
-                const accessToken = data.body['access_token']
-                this.spotifyApi.setAccessToken(accessToken)
-
-                fs.readFile(this.tokenFile, (err) => {
-                    if(!err){
-                        fs.writeFile(this.tokenFile, '', ()=>{
-                            fs.writeFile(this.tokenFile, accessToken, ()=>{console.log('oui')})
-                        })
-                    }
-                })
-            },exprireIn / 2 * 1000)
+            await this.getDataFromRequest(req)
+            this.expirationTokenManagement()
 
             return {
                 state : 'success',
@@ -90,6 +68,44 @@ class Spotify {
         }
     }
 
+    async getDataFromRequest(req){
+        const code = req.query.code
+        const resultAuthrization = await this.spotifyApi.authorizationCodeGrant(code)
+        this.tokenManagement(resultAuthrization)
+    }
+
+    tokenManagement(auth){
+        this.accessToken = auth.body['access_token']
+        this.refreshToken = auth.body['refresh_token']
+        this.tokenExpiration = auth.body['expires_in']
+        this.setAccessToken()
+    }
+
+    setAccessToken(){
+        this.spotifyApi.setAccessToken(this.accessToken)
+        this.setRefreshToken()
+    }
+
+    setRefreshToken(){
+        this.spotifyApi.setRefreshToken(this.refreshToken)
+    }
+
+
+    expirationTokenManagement(){
+        setInterval(async () => {
+            const data = await this.spotifyApi.refreshAccessToken()
+            const accessToken = data.body['access_token']
+            this.spotifyApi.setAccessToken(accessToken)
+
+            fs.readFile(this.tokenFile, (err) => {
+                if(!err){
+                    fs.writeFile(this.tokenFile, '', ()=>{
+                        fs.writeFile(this.tokenFile, accessToken, ()=>{console.log('oui')})
+                    })
+                }
+            })
+        }, this.tokenExpiration / 2 * 1000)
+    }
 }
 
 module.exports = {
