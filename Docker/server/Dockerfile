@@ -3,9 +3,10 @@ FROM node:$NODE_VERSION
 
 WORKDIR /app/spotify-api/
 
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-RUN npm init -y &&\
-    npm install express --save
-
-CMD [ "node", "server.js" ]
+CMD ["node", "server.js"]
