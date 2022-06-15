@@ -10,12 +10,23 @@ app.get('/', (req, res) => {
 })
 
 app.get('/auth', async (req, res) => {
-  let authResponse = await spotify.auth(req)
-  res.send(`${authResponse.state} : ${authResponse.message}`)
+  let test = await spotify.auth(req)
+  res.redirect('/getMe')
 })
 
 app.get('/getMe', async (req, res) => {
-  res.send(await getMe.getDataAboutMe())
+  const me = await getMe.getDataAboutMe()
+  const myFollowedArtists = await getMe.getFollowedArtists()
+  const mySavedTracks = await getMe.getMySavedTracks()
+  const mySavedAlbums = await getMe.getMySavedAlbums()
+  const myTopArtists = await getMe.getMyTopArtists()
+  const myTopTracks = await getMe.getMyTopTracks()
+  const myData = {
+    // me: me,
+    // playlists: await getMe.getMyPlaylists(me.body.id),
+    myTopTracks: myTopTracks,
+  }
+  res.json(myData)
 })
 
 app.listen(port, () => {

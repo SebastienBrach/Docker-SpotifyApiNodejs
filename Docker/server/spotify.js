@@ -2,7 +2,7 @@ const fs = require('fs')
 const SpotifyWebApi = require('spotify-web-api-node')
 
 class Spotify {
-    
+
     constructor() {
         this.clientId = 'bbd636c28a7f4b9f875948046b3021f6'
         this.clientSecret = 'f03f9ac87576486d82168c602fd7cea3'
@@ -96,6 +96,7 @@ class Spotify {
         this.accessToken = auth.body['access_token']
         this.refreshToken = auth.body['refresh_token']
         this.tokenExpiration = auth.body['expires_in']
+        this.tokenFileManagement()
         this.setAccessToken()
     }
 
@@ -120,8 +121,8 @@ class Spotify {
     expirationTokenManagement(){
         setInterval(async () => {
             const data = await this.spotifyApi.refreshAccessToken()
-            const accessToken = data.body['access_token']
-            this.spotifyApi.setAccessToken(accessToken)
+            this.accessToken = data.body['access_token']
+            this.spotifyApi.setAccessToken(this.accessToken)
             this.tokenFileManagement()
         }, this.tokenExpiration / 2 * 1000)
     }
@@ -133,7 +134,7 @@ class Spotify {
         fs.readFile(this.tokenFile, (err) => {
             if(!err){
                 fs.writeFile(this.tokenFile, '', ()=>{
-                    fs.writeFile(this.tokenFile, accessToken, ()=>{console.log('oui')})
+                    fs.writeFile(this.tokenFile, this.accessToken, ()=>{console.log('oui')})
                 })
             }
         })
