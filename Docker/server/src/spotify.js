@@ -134,6 +134,9 @@ class Spotify {
         fs.existsSync(this.tokenFile) ? this.writeInTokenFile() : this.createTokenFile()
     }
 
+    /**
+     * writeInTokenFile() => permet d'écrire dans le fichier token.json
+     */
     writeInTokenFile(){
         fs.readFile(this.tokenFile, (err) => {
             if(!err){
@@ -144,6 +147,9 @@ class Spotify {
         })
     }
 
+    /**
+     * createTokenFile() => permet de créer le fichier token.json
+     */
     createTokenFile(){
         fs.writeFile(this.tokenFile, this.accessToken, (err)=>{console.log(err)})
     }
