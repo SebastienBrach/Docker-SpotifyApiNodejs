@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const getMe = require("./getMe.js");
+const me = require("./me.js");
 const Spotify = require("./spotify.js");
 let spotify = new Spotify.instance()
 
@@ -15,15 +15,20 @@ app.get('/auth', async (req, res) => {
 })
 
 app.get('/getMe', async (req, res) => {
-  const me = await getMe.getDataAboutMe()
-  const myFollowedArtists = await getMe.getFollowedArtists()
-  const mySavedTracks = await getMe.getMySavedTracks()
-  const mySavedAlbums = await getMe.getMySavedAlbums()
-  const myTopArtists = await getMe.getMyTopArtists()
-  const myTopTracks = await getMe.getMyTopTracks()
+  const myAccountData = await me.getDataAboutMe()
+  const myPlaylists = await me.getMyPlaylists(myAccountData.body.id)
+  const myFollowedArtists = await me.getFollowedArtists()
+  const mySavedTracks = await me.getMySavedTracks()
+  const mySavedAlbums = await me.getMySavedAlbums()
+  const myTopArtists = await me.getMyTopArtists()
+  const myTopTracks = await me.getMyTopTracks()
   const myData = {
-    // me: me,
-    // playlists: await getMe.getMyPlaylists(me.body.id),
+    myAccountData: myAccountData,
+    myPlaylists: myPlaylists,
+    myFollowedArtists: myFollowedArtists,
+    mySavedTracks: mySavedTracks,
+    mySavedAlbums: mySavedAlbums,
+    myTopArtists: myTopArtists,
     myTopTracks: myTopTracks,
   }
   res.json(myData)
