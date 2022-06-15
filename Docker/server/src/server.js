@@ -1,8 +1,10 @@
 const express = require('express')
 const app = express()
+const dotenv = require('dotenv').config();
 const port = 3000
 const me = require("./me.js");
 const Spotify = require("./spotify.js");
+
 let spotify = new Spotify.instance()
 
 app.get('/', (req, res) => {
@@ -31,6 +33,7 @@ app.get('/getMe', async (req, res) => {
     myTopArtists: myTopArtists,
     myTopTracks: myTopTracks,
   }
+  console.log(process.env)
   res.json(myData)
 })
 

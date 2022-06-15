@@ -28,7 +28,7 @@ class Spotify {
             'user-library-modify',
             'user-library-read'
         ]
-        this.tokenFile = 'token.json'
+        this.tokenFile = process.env.TOKEN_FILE
         this.spotifyAPIInstance()
     }
 
