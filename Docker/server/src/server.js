@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const dotenv = require('dotenv').config();
 const port = 3000
-const Me = require("./me.js");
-const Spotify = require("./SpotifyAPIAuth.js");
+const Me = require("./Me.js");
+const Spotify = require("./Auth/SpotifyAPIAuth.js");
 
 const spotify = new Spotify.instance()
 const myData = new Me.instance()
