@@ -1,0 +1,9 @@
+// PLAYLIST_GET=/playlist/get
+// PLAYLIST_CREATE=/playlist/create
+// PLAYLIST_FOLLOW=/playlist/follow
+// PLAYLIST_UNFOLLOW=/playlist/unfollow
+// PLAYLIST_ADD_TRACKS=/playlist/addTracks
+// PLAYLIST_REMOVE_TRACKS=/playlist/removeTracks
+// PLAYLIST_REORDER_TRACKS=/playlist/reorderTracks
+// PLAYLIST_CHANGE_DETAILS=/playlist/changeDetails
+// PLAYLIST_CHANGE_COVER=/playlist/changeCover

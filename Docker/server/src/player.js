@@ -1,0 +1,11 @@
+// ME_PLAYER_DEVICES=/me/player/getDevices
+// ME_PLAYER_DEVICES=/me/player/getCurrentPlayingTrack
+// ME_PLAYER_DEVICES=/me/player/getCurrentPlaybackState
+// ME_PLAYER_DEVICES=/me/player/getRecentlyPlayedTracks
+// ME_PLAYER_DEVICES=/me/player/play
+// ME_PLAYER_DEVICES=/me/player/pause
+// ME_PLAYER_DEVICES=/me/player/skipToNext
+// ME_PLAYER_DEVICES=/me/player/skipToPrevious
+// ME_PLAYER_DEVICES=/me/player/setVolume
+// ME_PLAYER_DEVICES=/me/player/setRepeat
+// ME_PLAYER_DEVICES=/me/player/seek
