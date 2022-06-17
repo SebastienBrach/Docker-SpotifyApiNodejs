@@ -10,16 +10,16 @@ class Me {
     }
 
     async getAllMyAccountData(){
-        this.getMe = await this.getDataAboutMe()
+        this.getMe = await this.getMyAccountData()
         this.getMyPlaylists = await this.getMyPlaylists(this.getMe.id)
-        this.getFollowedArtists = await this.getFollowedArtists()
+        this.getMyFollowedArtists = await this.getMyFollowedArtists()
         this.getMySavedTracks = await this.getMySavedTracks()
         this.getMySavedAlbums = await this.getMySavedAlbums()
         this.getMyTopArtists = await this.getMyTopArtists()
         this.getMyTopTracks = await this.getMyTopTracks()
     }
 
-    async getDataAboutMe(){
+    async getMyAccountData(){
         return await this.spotifyApi.getMe()
     }
     
@@ -28,7 +28,7 @@ class Me {
         return data.body.items
     }
     
-    async getFollowedArtists(){
+    async getMyFollowedArtists(){
         const data = await this.spotifyApi.getUserPlaylists({ 
             limit : 50 
         })

@@ -1,7 +1,7 @@
 const fs = require('fs')
 const SpotifyWebApi = require('spotify-web-api-node')
 
-class Spotify {
+class SpotifyAPIAuth {
 
     constructor() {
         this.clientId = 'bbd636c28a7f4b9f875948046b3021f6'
@@ -169,5 +169,5 @@ class Spotify {
 }
 
 module.exports = {
-    instance : Spotify
+    instance : SpotifyAPIAuth
 }
