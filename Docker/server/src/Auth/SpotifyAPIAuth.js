@@ -28,7 +28,6 @@ class SpotifyAPIAuth {
             'user-library-modify',
             'user-library-read'
         ]
-        this.tokenFile = process.env.TOKEN_FILE
         this.spotifyAPIInstance()
     }
 
@@ -131,6 +130,7 @@ class SpotifyAPIAuth {
      * tokenFileManagement() => permet de gérer le fichier token.json
      */
     tokenFileManagement(){
+        this.tokenFile = process.env.TOKEN_FILE
         fs.existsSync(this.tokenFile) ? this.writeInTokenFile() : this.createTokenFile()
     }
 
@@ -150,8 +150,13 @@ class SpotifyAPIAuth {
     /**
      * createTokenFile() => permet de créer le fichier token.json
      */
-    createTokenFile(){
-        fs.writeFile(this.tokenFile, this.accessToken, (err)=>{console.log(err)})
+    createTokenFile(){        
+        console.log('yessssssssss')
+        console.log('noooooooo')
+        fs.writeFile(this.tokenFile, this.accessToken, (err)=>{
+            console.log('noooooooo')
+            console.log(err)
+        })
     }
 
     /**
