@@ -151,12 +151,7 @@ class SpotifyAPIAuth {
      * createTokenFile() => permet de créer le fichier token.json
      */
     createTokenFile(){        
-        console.log('yessssssssss')
-        console.log('noooooooo')
-        fs.writeFile(this.tokenFile, this.accessToken, (err)=>{
-            console.log('noooooooo')
-            console.log(err)
-        })
+        fs.writeFile(this.tokenFile, this.accessToken, (err)=>{console.log(err)})
     }
 
     /**
