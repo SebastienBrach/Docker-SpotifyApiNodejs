@@ -1,6 +1,33 @@
-// ### ALBUMS ###
-// ALBUM_GET=/album/get
-// ALBUM_GET_TRACKS=/album/getTracks
-// ALBUM_ADD_TO_SAVED_ALBUMS=/album/addToSavedAlbums
-// ALBUM_REMOVE_FROM_SAVED_ALBUMS=/album/removeFromSavedAlbums
-// ###
+const fs = require('fs')
+const SpotifyWebApi = require('spotify-web-api-node')
+const dotenv = require('dotenv').config();
+
+class Album {
+
+    constructor(){
+        this.token = fs.existsSync(process.env.TOKEN_FILE) ? fs.readFileSync(process.env.TOKEN_FILE, 'utf8') : ""
+        this.spotifyApi = new SpotifyWebApi()
+        this.spotifyApi.setAccessToken(this.token)
+    }
+
+    async getAlbum(){
+
+    }
+
+    async getAlbumTracks(){
+
+    }
+
+    async addToSavedAlbums(){
+
+    }
+
+    async removeFromSavedAlbums(){
+
+    }
+    
+}
+
+module.exports = {
+    instance : Me,
+}

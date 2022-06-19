@@ -4,6 +4,9 @@ const port = 3000
 const Spotify = require("./Auth/SpotifyAPIAuth.js");
 const spotify = new Spotify.instance()
 
+
+// https://www.alsacreations.com/tuto/lire/1857-Creation-dune-API-REST-avec-Express-et-TypeScript.html
+
 const meRoute = require("./Routes/Me.js");
 app.use(process.env.ME_BASE_ROUTE, meRoute);
 
