@@ -1,12 +1,12 @@
 const fs = require('fs')
 const SpotifyWebApi = require('spotify-web-api-node')
+const dotenv = require('dotenv').config();
 
 class Me {
 
     constructor(){
         this.token = fs.existsSync(process.env.TOKEN_FILE) ? fs.readFileSync(process.env.TOKEN_FILE, 'utf8') : ""
         this.spotifyApi = new SpotifyWebApi()
-        console.log(this.token)
         this.spotifyApi.setAccessToken(this.token)
     }
 
