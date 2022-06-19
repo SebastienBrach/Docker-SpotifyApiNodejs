@@ -5,6 +5,7 @@ const Spotify = require("./Auth/SpotifyAPIAuth.js");
 const spotify = new Spotify.instance()
 
 
+// VOIR DES VIDÉOS SUR TYPESCRIPT ET NODEJS
 // https://www.alsacreations.com/tuto/lire/1857-Creation-dune-API-REST-avec-Express-et-TypeScript.html
 
 const meRoute = require("./Routes/Me.js");
