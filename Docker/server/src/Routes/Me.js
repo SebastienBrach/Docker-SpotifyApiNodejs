@@ -10,8 +10,8 @@ router.get(process.env.ME_GET_ALL, async (req, res) => {
 })
 
 router.get(process.env.ME_GET_ACCOUNT, async (req, res) => {
-    let myAccountDat = await me.getMyAccountData()
-    res.json(myAccountDat)
+    let myAccountData = await me.getMyAccountData()
+    res.json(myAccountData)
 })
 
 router.get(process.env.ME_GET_PLAYLISTS, async (req, res) => {
