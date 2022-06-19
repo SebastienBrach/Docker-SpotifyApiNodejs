@@ -64,8 +64,6 @@ class Me {
         const data = await this.spotifyApi.getMyTopTracks({ limit : 50 })
         return data.body.items
     }
-
-
 }
 
 module.exports = {
