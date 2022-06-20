@@ -29,5 +29,5 @@ class Album {
 }
 
 module.exports = {
-    instance : Me,
+    instance : Album,
 }
