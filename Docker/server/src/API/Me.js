@@ -38,10 +38,9 @@ class Me {
     }
     
     async getMySavedTracks(){
-
-            const data = await this.spotifyApi.getMySavedTracks()
-            JSON.parse(data.body.items)
-            return data.body.items
+        const data = await this.spotifyApi.getMySavedTracks()
+        JSON.parse(data.body.items)
+        return data.body.items
     }
     
     async getMySavedAlbums(){

@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express')
 const app = express()
 const port = 3000
@@ -10,10 +11,9 @@ app.use(bodyParser.json());
 
 
 app.use((req, res, next) => {
-  log.info(NAMESPACE, `METHOD ${req.method} - URL ${req.url} - IP ${req.socket.remoteAddress}`);
-
+  log.info("SERVER", `METHOD ${req.method} - URL ${req.url} - IP ${req.socket.remoteAddress}`);
   res.on('finish', () => {
-    log.info(NAMESPACE, `METHOD ${req.method} - URL ${req.url} - IP ${req.socket.remoteAddress} - STATUS ${res.statusCode}`);
+    log.info("SERVER", `METHOD ${req.method} - URL ${req.url} - IP ${req.socket.remoteAddress} - STATUS ${res.statusCode}`);
   });
 });
 
@@ -33,20 +33,8 @@ app.use((req, res, next) => {
 });
 
 
-
-
-
-
-
 const meRoute = require("./Routes/Me.js");
 app.use(process.env.ME_BASE_ROUTE, meRoute);
-
-
-app.use(function(err, req, res, next) {
-  console.error('ouiiiiii');
-  res.status(404).send('Something broke!');
-});
-
 
 app.get('/', (req, res) => {
   res.redirect(spotify.redirectToCallback())
