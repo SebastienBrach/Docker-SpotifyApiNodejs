@@ -11,20 +11,27 @@ class Album {
     }
 
     async getAlbum(id){
-        return await this.spotifyApi.getAlbum(id)
-
+        const data = await this.spotifyApi.getAlbum(id)
+        return data.body
     }
 
-    async getAlbumTracks(){
-
+    async getAlbumTracks(id){
+        try {
+            const data = await this.spotifyApi.getAlbumTracks(id, { limit : 50, offset : 1 })
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
-    async addToSavedAlbums(){
-
+    async addToSavedAlbums(id){
+        const data = await this.spotifyApi.addToMySavedAlbums(id)
+        return data.body
     }
 
-    async removeFromSavedAlbums(){
-
+    async removeFromSavedAlbums(id){
+        const data = await this.spotifyApi.removeFromMySavedAlbums(id)
+        return data.body
     }
     
 }

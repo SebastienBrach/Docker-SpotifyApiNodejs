@@ -38,18 +38,14 @@ class Me {
     }
     
     async getMySavedTracks(){
-        const data = await this.spotifyApi.getMySavedTracks({
-            limit : 50,
-            offset: 1
-          })
-        return data.body.items
+
+            const data = await this.spotifyApi.getMySavedTracks()
+            JSON.parse(data.body.items)
+            return data.body.items
     }
     
     async getMySavedAlbums(){
-        const data = await this.spotifyApi.getMySavedAlbums({
-            limit : 2,
-            offset: 1
-          })
+        const data = await this.spotifyApi.getMySavedAlbums()
         return data.body.items
     }
     
@@ -59,7 +55,7 @@ class Me {
     }
     
     async getMyTopTracks(){
-        const data = await this.spotifyApi.getMyTopTracks({ limit : 50 })
+        const data = await this.spotifyApi.getMyTopTracks()
         return data.body.items
     }
 }
