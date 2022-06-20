@@ -39,6 +39,10 @@ app.use((req, res, next) => {
   return res.status(404).send({ error: error.message });
 });
 
+app.get('*', function (req, res) {
+  res.send('error');
+})
+
 
 app.get('/', (req, res) => {
   res.redirect(spotify.redirectToCallback())
