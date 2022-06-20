@@ -10,7 +10,8 @@ class Album {
         this.spotifyApi.setAccessToken(this.token)
     }
 
-    async getAlbum(){
+    async getAlbum(id){
+        return await this.spotifyApi.getAlbum(id)
 
     }
 

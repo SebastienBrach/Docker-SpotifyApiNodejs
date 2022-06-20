@@ -11,9 +11,7 @@ class Me {
     }
 
     async getAllMyAccountData(){
-        console.log('oui')
         this.getMe = await this.getMyAccountData()
-        console.log(this.getMe)
         this.getMyPlaylists = await this.getMyPlaylists(this.getMe.id)
         this.getMyFollowedArtists = await this.getMyFollowedArtists()
         this.getMySavedTracks = await this.getMySavedTracks()
